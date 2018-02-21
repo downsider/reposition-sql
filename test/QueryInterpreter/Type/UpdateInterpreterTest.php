@@ -1,8 +1,10 @@
 <?php
 
 
-namespace Silktide\Reposition\Sql\Test\QueryInterpreter\Type;
-use Silktide\Reposition\Sql\QueryInterpreter\Type\UpdateInterpreter;
+namespace Lexide\Reposition\Sql\Test\QueryInterpreter\Type;
+use Lexide\Reposition\Metadata\EntityMetadata;
+use Lexide\Reposition\QueryBuilder\TokenSequencerInterface;
+use Lexide\Reposition\Sql\QueryInterpreter\Type\UpdateInterpreter;
 
 /**
  * UpdateInterpreterTest
@@ -38,7 +40,7 @@ class UpdateInterpreterTest extends \PHPUnit_Framework_TestCase
     {
         $sequence = [];
         foreach ($tokens as $tokenArgs) {
-            $token = \Mockery::mock("Silktide\\Reposition\\QueryBuilder\\QueryToken\\" . ucfirst($tokenArgs[0]));
+            $token = \Mockery::mock("Lexide\\Reposition\\QueryBuilder\\QueryToken\\" . ucfirst($tokenArgs[0]));
             if (isset($tokenArgs[1])) {
                 $token->shouldReceive("getType")->andReturn($tokenArgs[1]);
             }
@@ -52,10 +54,10 @@ class UpdateInterpreterTest extends \PHPUnit_Framework_TestCase
         }
         $sequence[] = false;
 
-        $metadata = \Mockery::mock("Silktide\\Reposition\\Metadata\\EntityMetadata");
+        $metadata = \Mockery::mock(EntityMetadata::class);
         $metadata->shouldReceive("getCollection")->andReturn($this->collection);
 
-        $tokenSequencer = \Mockery::mock("Silktide\\Reposition\\QueryBuilder\\TokenSequencerInterface");
+        $tokenSequencer = \Mockery::mock(TokenSequencerInterface::class);
         $tokenSequencer->shouldReceive("getNextToken")->andReturnValues($sequence);
         $tokenSequencer->shouldReceive("getEntityMetadata")->andReturn($metadata);
 

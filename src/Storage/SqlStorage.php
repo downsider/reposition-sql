@@ -1,17 +1,17 @@
 <?php
 
-namespace Silktide\Reposition\Sql\Storage;
+namespace Lexide\Reposition\Sql\Storage;
 
 use Psr\Log\LoggerAwareTrait;
-use Silktide\Reposition\Hydrator\HydratorInterface;
-use Silktide\Reposition\Metadata\EntityMetadataProviderInterface;
-use Silktide\Reposition\Normaliser\NormaliserInterface;
-use Silktide\Reposition\QueryBuilder\TokenSequencerInterface;
-use Silktide\Reposition\QueryInterpreter\CompiledQuery;
-use Silktide\Reposition\Sql\QueryInterpreter\SqlQueryInterpreter;
-use Silktide\Reposition\Storage\StorageInterface;
-use Silktide\Reposition\Storage\Logging\QueryLogProcessorInterface;
-use Silktide\Reposition\Storage\Logging\ErrorLogProcessorInterface;
+use Lexide\Reposition\Hydrator\HydratorInterface;
+use Lexide\Reposition\Metadata\EntityMetadataProviderInterface;
+use Lexide\Reposition\Normaliser\NormaliserInterface;
+use Lexide\Reposition\QueryBuilder\TokenSequencerInterface;
+use Lexide\Reposition\QueryInterpreter\CompiledQuery;
+use Lexide\Reposition\Sql\QueryInterpreter\SqlQueryInterpreter;
+use Lexide\Reposition\Storage\StorageInterface;
+use Lexide\Reposition\Storage\Logging\QueryLogProcessorInterface;
+use Lexide\Reposition\Storage\Logging\ErrorLogProcessorInterface;
 
 class SqlStorage implements StorageInterface
 {

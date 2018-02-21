@@ -1,11 +1,11 @@
 <?php
 
-namespace Silktide\Reposition\Sql\Normaliser;
+namespace Lexide\Reposition\Sql\Normaliser;
 
-use Silktide\Reposition\Exception\NormalisationException;
-use Silktide\Reposition\Metadata\EntityMetadata;
-use Silktide\Reposition\Normaliser\NormaliserInterface;
-use Silktide\Reposition\Metadata\EntityMetadataProviderInterface;
+use Lexide\Reposition\Exception\NormalisationException;
+use Lexide\Reposition\Metadata\EntityMetadata;
+use Lexide\Reposition\Normaliser\NormaliserInterface;
+use Lexide\Reposition\Metadata\EntityMetadataProviderInterface;
 
 class SqlNormaliser implements NormaliserInterface
 {

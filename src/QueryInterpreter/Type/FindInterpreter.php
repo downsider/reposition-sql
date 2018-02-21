@@ -1,14 +1,14 @@
 <?php
 
-namespace Silktide\Reposition\Sql\QueryInterpreter\Type;
+namespace Lexide\Reposition\Sql\QueryInterpreter\Type;
 
-use Silktide\Reposition\Exception\InterpretationException;
-use Silktide\Reposition\QueryBuilder\QueryToken\Entity;
-use Silktide\Reposition\QueryBuilder\QueryToken\Token;
-use Silktide\Reposition\QueryBuilder\QueryToken\Value;
-use Silktide\Reposition\QueryBuilder\QueryToken\Reference;
-use Silktide\Reposition\QueryBuilder\TokenSequencerInterface;
-use Silktide\Reposition\Metadata\EntityMetadata;
+use Lexide\Reposition\Exception\InterpretationException;
+use Lexide\Reposition\QueryBuilder\QueryToken\Entity;
+use Lexide\Reposition\QueryBuilder\QueryToken\Token;
+use Lexide\Reposition\QueryBuilder\QueryToken\Value;
+use Lexide\Reposition\QueryBuilder\QueryToken\Reference;
+use Lexide\Reposition\QueryBuilder\TokenSequencerInterface;
+use Lexide\Reposition\Metadata\EntityMetadata;
 
 class FindInterpreter extends AbstractSqlQueryTypeInterpreter
 {

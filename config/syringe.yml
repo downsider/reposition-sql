@@ -9,25 +9,25 @@ parameters:
     dbName: ""
 
     defaultDsn: "{dbDriver}:dbname={dbName};host={dbHost}"
-    dsnTemplate: "%silktide_reposition-sql.defaultDsn%"
+    dsnTemplate: "%lexide_reposition-sql.defaultDsn%"
 
     identifierDelimiter: "`"
 
     useMysqlBufferedQueries: false
 
-    silktide_reposition.tokenDefinitions: "%silktide_reposition-sql.sqlStatementDefinition%"
+    lexide_reposition.tokenDefinitions: "%lexide_reposition-sql.sqlStatementDefinition%"
 
 services:
     storage:
-        class: Silktide\Reposition\Sql\Storage\SqlStorage
+        class: Lexide\Reposition\Sql\Storage\SqlStorage
         arguments:
             - "@dbAdapter"
             - "@interpreter"
-            - "@silktide_reposition.defaultHydrator"
+            - "@lexide_reposition.defaultHydrator"
             - "@normaliser"
 
     dbAdapter:
-        class: Silktide\Reposition\Sql\Storage\PdoAdapter
+        class: Lexide\Reposition\Sql\Storage\PdoAdapter
         arguments:
             - "@credentials"
             - "%dsnTemplate%"
@@ -35,7 +35,7 @@ services:
             - "%useMysqlBufferedQueries%"
 
     credentials:
-        class: Silktide\Reposition\Sql\Storage\DbCredentials
+        class: Lexide\Reposition\Sql\Storage\DbCredentials
         arguments:
             - "%dbDriver%"
             - "%dbHost%"
@@ -44,37 +44,37 @@ services:
             - "%dbName%"
 
     interpreter:
-        class: Silktide\Reposition\Sql\QueryInterpreter\SqlQueryInterpreter
+        class: Lexide\Reposition\Sql\QueryInterpreter\SqlQueryInterpreter
         arguments:
-            - "@silktide_reposition.tokenParser"
+            - "@lexide_reposition.tokenParser"
             - "#queryTypeInterpreter"
             - "%identifierDelimiter%"
 
     findInterpreter:
-        class: Silktide\Reposition\Sql\QueryInterpreter\Type\FindInterpreter
+        class: Lexide\Reposition\Sql\QueryInterpreter\Type\FindInterpreter
         tags:
             - "queryTypeInterpreter"
 
     saveInterpreter:
-        class: Silktide\Reposition\Sql\QueryInterpreter\Type\SaveInterpreter
+        class: Lexide\Reposition\Sql\QueryInterpreter\Type\SaveInterpreter
         tags:
             - "queryTypeInterpreter"
 
     updateInterpreter:
-        class: Silktide\Reposition\Sql\QueryInterpreter\Type\UpdateInterpreter
+        class: Lexide\Reposition\Sql\QueryInterpreter\Type\UpdateInterpreter
         tags:
             - "queryTypeInterpreter"
 
     deleteInterpreter:
-        class: Silktide\Reposition\Sql\QueryInterpreter\Type\DeleteInterpreter
+        class: Lexide\Reposition\Sql\QueryInterpreter\Type\DeleteInterpreter
         tags:
             - "queryTypeInterpreter"
 
     normaliser:
-        class: Silktide\Reposition\Sql\Normaliser\SqlNormaliser
+        class: Lexide\Reposition\Sql\Normaliser\SqlNormaliser
 
-    silktide_reposition.defaultStorage:
+    lexide_reposition.defaultStorage:
         aliasOf: "@storage"
 
-    silktide_reposition.defaultNormaliser:
+    lexide_reposition.defaultNormaliser:
         aliasOf: "@normaliser"

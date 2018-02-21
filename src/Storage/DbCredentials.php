@@ -1,6 +1,6 @@
 <?php
 
-namespace Silktide\Reposition\Sql\Storage;
+namespace Lexide\Reposition\Sql\Storage;
 
 /**
  * DbCredentials

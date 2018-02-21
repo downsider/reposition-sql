@@ -1,11 +1,12 @@
 <?php
 
-namespace Silktide\Reposition\Sql\Test\QueryInterpreter\Type;
+namespace Lexide\Reposition\Sql\Test\QueryInterpreter\Type;
 
-use Silktide\Reposition\Exception\MetadataException;
-use Silktide\Reposition\Sql\QueryInterpreter\Type\FindInterpreter;
-use Silktide\Reposition\QueryBuilder\TokenSequencerInterface;
-use Silktide\Reposition\Metadata\EntityMetadataProviderInterface;
+use Lexide\Reposition\Exception\MetadataException;
+use Lexide\Reposition\Metadata\EntityMetadata;
+use Lexide\Reposition\Sql\QueryInterpreter\Type\FindInterpreter;
+use Lexide\Reposition\QueryBuilder\TokenSequencerInterface;
+use Lexide\Reposition\Metadata\EntityMetadataProviderInterface;
 
 class FindInterpreterTest extends \PHPUnit_Framework_TestCase {
 
@@ -45,7 +46,7 @@ class FindInterpreterTest extends \PHPUnit_Framework_TestCase {
             $fields = $config["fields"];
             $primaryKey = empty($config["pk"])? "id": $config["pk"];
 
-            $metadata = \Mockery::mock("Silktide\\Reposition\\Metadata\\EntityMetadata");
+            $metadata = \Mockery::mock(EntityMetadata::class);
             $metadata->shouldReceive("getEntity")->andReturn($entity);
             $metadata->shouldReceive("getCollection")->andReturn($collection);
             $metadata->shouldReceive("getFieldNames")->andReturn($fields);
@@ -61,7 +62,7 @@ class FindInterpreterTest extends \PHPUnit_Framework_TestCase {
     {
         $sequence = [];
         foreach ($tokens as $tokenArgs) {
-            $token = \Mockery::mock("Silktide\\Reposition\\QueryBuilder\\QueryToken\\" . ucfirst($tokenArgs[0]));
+            $token = \Mockery::mock("Lexide\\Reposition\\QueryBuilder\\QueryToken\\" . ucfirst($tokenArgs[0]));
             if (isset($tokenArgs[1])) {
                 $token->shouldReceive("getType")->andReturn($tokenArgs[1]);
             }
@@ -76,7 +77,7 @@ class FindInterpreterTest extends \PHPUnit_Framework_TestCase {
         $sequence[] = false;
 
 
-        $tokenSequencer = \Mockery::mock("Silktide\\Reposition\\QueryBuilder\\TokenSequencerInterface");
+        $tokenSequencer = \Mockery::mock(TokenSequencerInterface::class);
         $tokenSequencer->shouldReceive("getNextToken")->andReturnValues($sequence);
         $tokenSequencer->shouldReceive("getEntityMetadata")->andReturn($metadataMock);
         $tokenSequencer->shouldReceive("getIncludes")->andReturn($includes);
@@ -695,4 +696,3 @@ class FindInterpreterTest extends \PHPUnit_Framework_TestCase {
     }
 
 }
- 

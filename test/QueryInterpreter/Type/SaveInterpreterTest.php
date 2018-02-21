@@ -1,12 +1,12 @@
 <?php
 
 
-namespace Silktide\Reposition\Sql\Test\QueryInterpreter\Type;
+namespace Lexide\Reposition\Sql\Test\QueryInterpreter\Type;
 
-use Silktide\Reposition\Metadata\EntityMetadata;
-use Silktide\Reposition\QueryBuilder\TokenSequencerInterface;
-use Silktide\Reposition\QueryInterpreter\CompiledQuery;
-use Silktide\Reposition\Sql\QueryInterpreter\Type\SaveInterpreter;
+use Lexide\Reposition\Metadata\EntityMetadata;
+use Lexide\Reposition\QueryBuilder\TokenSequencerInterface;
+use Lexide\Reposition\Sql\QueryInterpreter\Type\SaveInterpreter;
+use Lexide\Reposition\QueryBuilder\QueryToken\Entity as EntityToken;
 
 /**
  * SaveInterpreterTest
@@ -27,28 +27,28 @@ class SaveInterpreterTest extends \PHPUnit_Framework_TestCase
      * @param $fields
      * @param $expectedSql
      * @param array $expectedValues
-     * @throws \Silktide\Reposition\Exception\InterpretationException
+     * @throws \Lexide\Reposition\Exception\InterpretationException
      */
     public function testInterpretation(array $entities, $fields, $expectedSql, $expectedValues = [])
     {
         /** @var TokenSequencerInterface $tokenSequencer */
         $sequence = [];
         foreach ($entities as $entity) {
-            $token = \Mockery::mock("Silktide\\Reposition\\QueryBuilder\\QueryToken\\Entity");
+            $token = \Mockery::mock(EntityToken::class);
             $token->shouldReceive("getType")->andReturn("entity");
             $token->shouldReceive("getEntity")->andReturn($entity);
             $sequence[] = $token;
         }
         $sequence[] = false;
 
-        $metadata = \Mockery::mock("Silktide\\Reposition\\Metadata\\EntityMetadata");
+        $metadata = \Mockery::mock(EntityMetadata::class);
         $metadata->shouldReceive("getCollection")->andReturn($this->collection);
         $metadata->shouldReceive("getPrimaryKey")->andReturn("id");
         $metadata->shouldReceive("getPrimaryKeyMetadata")->andReturn([EntityMetadata::METADATA_FIELD_AUTO_INCREMENTING => true]);
         $metadata->shouldReceive("getFieldNames")->andReturn($fields);
         $metadata->shouldReceive("getRelationships")->andReturn([]);
 
-        $tokenSequencer = \Mockery::mock("Silktide\\Reposition\\QueryBuilder\\TokenSequencerInterface");
+        $tokenSequencer = \Mockery::mock(TokenSequencerInterface::class);
         $tokenSequencer->shouldReceive("getNextToken")->andReturnValues($sequence);
         $tokenSequencer->shouldReceive("getEntityMetadata")->andReturn($metadata);
         $tokenSequencer->shouldReceive("getOptions")->andReturn([]);
@@ -211,31 +211,31 @@ class SaveInterpreterTest extends \PHPUnit_Framework_TestCase
      * @dataProvider relationshipProvider
      *
      * @param array $entities
-     * @param $fields
+     * @param $relationships
      * @param $expectedSql
      * @param array $expectedValues
-     * @throws \Silktide\Reposition\Exception\InterpretationException
+     * @throws \Lexide\Reposition\Exception\InterpretationException
      */
     public function testSavingRelationships(array $entities, $relationships, $expectedSql, $expectedValues = [])
     {
         /** @var TokenSequencerInterface $tokenSequencer */
         $sequence = [];
         foreach ($entities as $entity) {
-            $token = \Mockery::mock("Silktide\\Reposition\\QueryBuilder\\QueryToken\\Entity");
+            $token = \Mockery::mock(EntityToken::class);
             $token->shouldReceive("getType")->andReturn("entity");
             $token->shouldReceive("getEntity")->andReturn($entity);
             $sequence[] = $token;
         }
         $sequence[] = false;
 
-        $metadata = \Mockery::mock("Silktide\\Reposition\\Metadata\\EntityMetadata");
+        $metadata = \Mockery::mock(EntityMetadata::class);
         $metadata->shouldReceive("getCollection")->andReturn($this->collection);
         $metadata->shouldReceive("getPrimaryKey")->andReturn("id");
         $metadata->shouldReceive("getPrimaryKeyMetadata")->andReturn([EntityMetadata::METADATA_FIELD_AUTO_INCREMENTING => true]);
         $metadata->shouldReceive("getFieldNames")->andReturn(["field_1"]);
         $metadata->shouldReceive("getRelationships")->andReturn($relationships);
 
-        $tokenSequencer = \Mockery::mock("Silktide\\Reposition\\QueryBuilder\\TokenSequencerInterface");
+        $tokenSequencer = \Mockery::mock(TokenSequencerInterface::class);
         $tokenSequencer->shouldReceive("getNextToken")->andReturnValues($sequence);
         $tokenSequencer->shouldReceive("getEntityMetadata")->andReturn($metadata);
         $tokenSequencer->shouldReceive("getOptions")->andReturn([]);
@@ -273,7 +273,7 @@ class SaveInterpreterTest extends \PHPUnit_Framework_TestCase
             [ #0 one to one, standard setup
                 [$insertEntity],
                 [
-                    "Silktide\\Reposition\\Sql\\Test\\QueryInterpreter\\Type\\Child" => [
+                    Child::class => [
                         EntityMetadata::METADATA_RELATIONSHIP_TYPE => EntityMetadata::RELATIONSHIP_TYPE_ONE_TO_ONE,
                         EntityMetadata::METADATA_RELATIONSHIP_PROPERTY => "child",
                         EntityMetadata::METADATA_RELATIONSHIP_OUR_FIELD => "child_id",
@@ -342,25 +342,25 @@ class SaveInterpreterTest extends \PHPUnit_Framework_TestCase
      * @param array $fields
      * @param $expectedQueryType
      * @param array $options
-     * @throws \Silktide\Reposition\Exception\InterpretationException
+     * @throws \Lexide\Reposition\Exception\InterpretationException
      */
     public function testNonAutoIncrementingPrimaryKey(array $entity, array $fields, $expectedQueryType, array $options = [])
     {
         /** @var TokenSequencerInterface $tokenSequencer */
-        $token = \Mockery::mock("Silktide\\Reposition\\QueryBuilder\\QueryToken\\Entity");
+        $token = \Mockery::mock(EntityToken::class);
         $token->shouldReceive("getType")->andReturn("entity");
         $token->shouldReceive("getEntity")->andReturn($entity);
         $sequence[] = $token;
         $sequence[] = false;
 
-        $metadata = \Mockery::mock("Silktide\\Reposition\\Metadata\\EntityMetadata");
+        $metadata = \Mockery::mock(EntityMetadata::class);
         $metadata->shouldReceive("getCollection")->andReturn($this->collection);
         $metadata->shouldReceive("getPrimaryKey")->andReturn("id");
         $metadata->shouldReceive("getPrimaryKeyMetadata")->andReturn([EntityMetadata::METADATA_FIELD_AUTO_INCREMENTING => false]);
         $metadata->shouldReceive("getFieldNames")->andReturn($fields);
         $metadata->shouldReceive("getRelationships")->andReturn([]);
 
-        $tokenSequencer = \Mockery::mock("Silktide\\Reposition\\QueryBuilder\\TokenSequencerInterface");
+        $tokenSequencer = \Mockery::mock(TokenSequencerInterface::class);
         $tokenSequencer->shouldReceive("getNextToken")->andReturnValues($sequence);
         $tokenSequencer->shouldReceive("getEntityMetadata")->andReturn($metadata);
         $tokenSequencer->shouldReceive("getOptions")->andReturn($options);

@@ -1,10 +1,11 @@
 <?php
 
-namespace Silktide\Reposition\Sql\Test\Normaliser;
+namespace Lexide\Reposition\Sql\Test\Normaliser;
 
-use Silktide\Reposition\Exception\MetadataException;
-use Silktide\Reposition\Metadata\EntityMetadata;
-use Silktide\Reposition\Sql\Normaliser\SqlNormaliser;
+use Lexide\Reposition\Exception\MetadataException;
+use Lexide\Reposition\Metadata\EntityMetadata;
+use Lexide\Reposition\Metadata\EntityMetadataProviderInterface;
+use Lexide\Reposition\Sql\Normaliser\SqlNormaliser;
 
 class SqlNormaliserTest extends \PHPUnit_Framework_TestCase {
 
@@ -63,14 +64,14 @@ class SqlNormaliserTest extends \PHPUnit_Framework_TestCase {
 
         $this->metadataMocks = [];
         foreach ($relationships as $entity => $meta) {
-            $metadataMock = \Mockery::mock("Silktide\\Reposition\\Metadata\\EntityMetadata");
+            $metadataMock = \Mockery::mock(EntityMetadata::class);
             $metadataMock->shouldReceive("getCollection")->andReturn($entity);
             $metadataMock->shouldReceive("getRelationships")->andReturn($meta["children"]);
             $metadataMock->shouldReceive("getPrimaryKey")->andReturn($meta["primaryKey"]);
             $this->metadataMocks[$entity] = $metadataMock;
         }
 
-        $metadataProvider = \Mockery::mock("Silktide\\Reposition\\Metadata\\EntityMetadataProviderInterface");
+        $metadataProvider = \Mockery::mock(EntityMetadataProviderInterface::class);
         $metadataProvider->shouldReceive("getEntityMetadata")->andReturnUsing([$this, "getMetadataMock"]);
 
         $normaliser = new SqlNormaliser();
@@ -96,17 +97,17 @@ class SqlNormaliserTest extends \PHPUnit_Framework_TestCase {
 
     public function dataSetProvider()
     {
-        $two = \Mockery::mock("Silktide\\Reposition\\Metadata\\EntityMetadata");
+        $two = \Mockery::mock(EntityMetadata::class);
         $two->shouldReceive("getEntity")->andReturn("two");
         $two->shouldReceive("getCollection")->andReturn("two");
         $two->shouldReceive("getPrimaryKey")->andReturn("field3");
 
-        $three = \Mockery::mock("Silktide\\Reposition\\Metadata\\EntityMetadata");
+        $three = \Mockery::mock(EntityMetadata::class);
         $three->shouldReceive("getEntity")->andReturn("three");
         $three->shouldReceive("getCollection")->andReturn("three");
         $three->shouldReceive("getPrimaryKey")->andReturn("field5");
 
-        $four = \Mockery::mock("Silktide\\Reposition\\Metadata\\EntityMetadata");
+        $four = \Mockery::mock(EntityMetadata::class);
         $four->shouldReceive("getEntity")->andReturn("four");
         $four->shouldReceive("getCollection")->andReturn("four");
         $four->shouldReceive("getPrimaryKey")->andReturn("field3");
@@ -310,4 +311,3 @@ class SqlNormaliserTest extends \PHPUnit_Framework_TestCase {
     }
 
 }
- 

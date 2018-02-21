@@ -1,13 +1,13 @@
 <?php
 
+namespace Lexide\Reposition\Sql\QueryInterpreter\Type;
 
-namespace Silktide\Reposition\Sql\QueryInterpreter\Type;
-use Downsider\Clay\Model\NameConverterTrait;
-use Silktide\Reposition\Exception\InterpretationException;
-use Silktide\Reposition\QueryBuilder\QueryToken\Entity;
-use Silktide\Reposition\QueryBuilder\QueryToken\Value;
-use Silktide\Reposition\QueryBuilder\TokenSequencerInterface;
-use Silktide\Reposition\Metadata\EntityMetadata;
+use Lexide\Clay\Model\NameConverterTrait;
+use Lexide\Reposition\Exception\InterpretationException;
+use Lexide\Reposition\QueryBuilder\QueryToken\Entity;
+use Lexide\Reposition\QueryBuilder\QueryToken\Value;
+use Lexide\Reposition\QueryBuilder\TokenSequencerInterface;
+use Lexide\Reposition\Metadata\EntityMetadata;
 
 /**
  * SaveInterpreter

@@ -1,13 +1,13 @@
 <?php
 
-namespace Silktide\Reposition\Sql\Storage;
+namespace Lexide\Reposition\Sql\Storage;
 
 /**
  * Class PdoAdapter
  *
  * Wrapper for a PDO connection with lazy loading
  *
- * @package Silktide\Reposition\Sql\Storage
+ * @package Lexide\Reposition\Sql\Storage
  */
 class PdoAdapter
 {

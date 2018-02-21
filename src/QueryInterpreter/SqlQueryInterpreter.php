@@ -1,20 +1,20 @@
 <?php
 
-namespace Silktide\Reposition\Sql\QueryInterpreter;
+namespace Lexide\Reposition\Sql\QueryInterpreter;
 
-use Silktide\Reposition\Exception\QueryException;
-use Silktide\Reposition\Exception\InterpretationException;
-use Silktide\Reposition\Metadata\EntityMetadataProviderInterface;
-use Silktide\Reposition\Normaliser\NormaliserInterface;
-use Silktide\Reposition\QueryBuilder\TokenSequencerInterface;
-use Silktide\Reposition\QueryBuilder\TokenParser;
-use Silktide\Reposition\QueryBuilder\QueryToken\Token;
-use Silktide\Reposition\QueryBuilder\QueryToken\Value;
-use Silktide\Reposition\QueryBuilder\QueryToken\Reference;
-use Silktide\Reposition\QueryBuilder\QueryToken\Entity;
-use Silktide\Reposition\QueryInterpreter\CompiledQuery;
-use Silktide\Reposition\QueryInterpreter\QueryInterpreterInterface;
-use Silktide\Reposition\Sql\QueryInterpreter\Type\AbstractSqlQueryTypeInterpreter;
+use Lexide\Reposition\Exception\QueryException;
+use Lexide\Reposition\Exception\InterpretationException;
+use Lexide\Reposition\Metadata\EntityMetadataProviderInterface;
+use Lexide\Reposition\Normaliser\NormaliserInterface;
+use Lexide\Reposition\QueryBuilder\TokenSequencerInterface;
+use Lexide\Reposition\QueryBuilder\TokenParser;
+use Lexide\Reposition\QueryBuilder\QueryToken\Token;
+use Lexide\Reposition\QueryBuilder\QueryToken\Value;
+use Lexide\Reposition\QueryBuilder\QueryToken\Reference;
+use Lexide\Reposition\QueryBuilder\QueryToken\Entity;
+use Lexide\Reposition\QueryInterpreter\CompiledQuery;
+use Lexide\Reposition\QueryInterpreter\QueryInterpreterInterface;
+use Lexide\Reposition\Sql\QueryInterpreter\Type\AbstractSqlQueryTypeInterpreter;
 
 class SqlQueryInterpreter implements QueryInterpreterInterface
 {

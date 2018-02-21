@@ -1,9 +1,9 @@
 <?php
 
 
-namespace Silktide\Reposition\Sql\QueryInterpreter\Type;
-use Silktide\Reposition\QueryBuilder\QueryToken\Entity;
-use Silktide\Reposition\QueryBuilder\TokenSequencerInterface;
+namespace Lexide\Reposition\Sql\QueryInterpreter\Type;
+use Lexide\Reposition\QueryBuilder\QueryToken\Entity;
+use Lexide\Reposition\QueryBuilder\TokenSequencerInterface;
 
 /**
  * DeleteInterpreter

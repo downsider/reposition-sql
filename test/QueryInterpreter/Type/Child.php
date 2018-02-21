@@ -1,6 +1,6 @@
 <?php
 
-namespace Silktide\Reposition\Sql\Test\QueryInterpreter\Type;
+namespace Lexide\Reposition\Sql\Test\QueryInterpreter\Type;
 
 /**
  * Child
